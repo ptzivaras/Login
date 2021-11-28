@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -28,11 +30,20 @@ public class Login implements ActionListener {
 		PasswordLabel.setBounds(50, 150, 75, 25);
 		message.setBounds(125, 250, 250, 35);
 		message.setFont(new Font(null,Font.ITALIC,25));
+		userIDField.setBounds(125, 100, 250, 35);
+		userPassword.setBounds(125, 150, 250, 35);
 		
+		loginButton.setBounds(125,200,100,25);
+		loginButton.addActionListener(this);
+		resetButton.setBounds(225,200,100,25);
+		resetButton.addActionListener(this);
 		
 		frame.add(userIDLabel);//add components
 		frame.add(PasswordLabel);
-		
+		frame.add(userIDField);
+		frame.add(userPassword);
+		frame.add(loginButton);
+		frame.add(resetButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close frame when exit
 		frame.setSize(420, 420);
 		frame.setLayout(null);//no layout manager
@@ -42,6 +53,31 @@ public class Login implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource()==resetButton) {
+			userIDField.setText("");//Clear Text
+			userPassword.setText("");
+		}
+		if(e.getSource()==loginButton) {
+			
+			String userID = userIDField.getText();
+			String password = String.valueOf(userPassword.getPassword());
+			
+			if(loginInfoCopy.containsKey(userID)) {//if username correct
+				if(loginInfoCopy.get(userID).equals(password)) {
+					message.setForeground(Color.green);
+					message.setText("Login successful");
+					Welcome welcomePage = new Welcome(userID);
+				}
+				else {
+					message.setForeground(Color.red);
+					message.setText("Wrong password");
+				}
+			}
+			else {
+				message.setForeground(Color.red);
+				message.setText("username not found");
+			}
+			
+		}
 	}
 }
