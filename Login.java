@@ -40,6 +40,7 @@ public class Login implements ActionListener {
 		
 		frame.add(userIDLabel);//add components
 		frame.add(PasswordLabel);
+		frame.add(message);
 		frame.add(userIDField);
 		frame.add(userPassword);
 		frame.add(loginButton);
@@ -52,7 +53,6 @@ public class Login implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource()==resetButton) {
 			userIDField.setText("");//Clear Text
 			userPassword.setText("");
